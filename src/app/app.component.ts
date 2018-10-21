@@ -1,10 +1,16 @@
 import { Component } from '@angular/core';
+import { CdkDragDrop, CdkDrop } from '@angular/cdk/drag-drop';
 
-export interface spot {
+export interface Spot {
   name: number;
   x: number;
   y: number;
   value: number;
+}
+
+export interface Log {
+  time: string;
+  message: string;
 }
 
 @Component({
@@ -13,19 +19,21 @@ export interface spot {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  logger: Log[] = [];
+
   playerSize: number = 300;
   boardSize: number = 1000;
   spotSize: number = 136;
   offset: number = 4;
   offsetX: number = 13;
   offsetY: number = this.spotSize/2 + this.offset/2;
-  cX: number = this.boardSize/2 - this.spotSize/2 + this.offset/2;
-  cY: number = this.boardSize/2 - this.spotSize/2 + this.playerSize + this.offset/2;
+  cX: number = this.boardSize/2 - this.spotSize/2;
+  cY: number = this.boardSize/2 - this.spotSize/2 + this.playerSize + 20;
 
-  p4: spot[] = [
+  p4: Spot[] = [
     { name: 0, x: this.cX, y: this.cY, value: 4 },
   ];
-  p3: spot[] = [
+  p3: Spot[] = [
     // Inner top
     { name: 0, x: this.cX - (this.spotSize - this.offsetX), y: this.cY - (this.spotSize + this.offset) + this.offsetY, value: 3 },
     { name: 1, x: this.cX - (this.spotSize - this.offsetX), y: this.cY + (this.spotSize + this.offset) - this.offsetY, value: 3 },
@@ -37,7 +45,7 @@ export class AppComponent {
     { name: 5, x: this.cX + (this.spotSize - this.offsetX), y: this.cY + (this.spotSize + this.offset) - this.offsetY, value: 3 },
 
   ];
-  p2: spot[] = [
+  p2: Spot[] = [
     // Middle middle left and right top
     { name: 0, x: this.cX - (this.spotSize - this.offsetX)*2, y: this.cY - (this.spotSize + this.offset), value: 2 },
     { name: 1, x: this.cX - (this.spotSize - this.offsetX)*2, y: this.cY + (this.spotSize + this.offset), value: 2 },
@@ -58,7 +66,7 @@ export class AppComponent {
     { name: 10, x: this.cX + (this.spotSize - this.offsetX)*2, y: this.cY - (this.spotSize + this.offset), value: 2 },
     { name: 11, x: this.cX + (this.spotSize - this.offsetX)*2, y: this.cY + (this.spotSize + this.offset), value: 2 },
   ];
-  p1: spot[] = [
+  p1: Spot[] = [
     // Left and right top
     { name: 0, x: this.cX - (this.spotSize - this.offsetX)*3, y: this.cY - (this.spotSize + this.offset)*2 + this.offsetY*3, value: 1 },
     { name: 1, x: this.cX - (this.spotSize - this.offsetX)*3, y: this.cY + (this.spotSize + this.offset)*2 - this.offsetY*3, value: 1 },
@@ -98,5 +106,21 @@ export class AppComponent {
     [{p:1,s:9}, {p:1,s:11}, {p:1,s:13}, {p:1,s:15}]
   ];
 
-  
+  constructor() {
+    this.log('Game started with 1 player');
+  }
+
+  onDrag() {
+    this.log('started dragging...');
+  }
+
+  onDrop(event: CdkDragDrop<string[]>) {
+    this.log('dropped at' );
+    console.log(event);
+  }
+
+  log(msg: string) {
+    let d = new Date();
+    this.logger.push({time: d.getHours() + ':' + d.getMinutes(), message: msg});
+  }
 }

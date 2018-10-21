@@ -1,14 +1,18 @@
 <div id="game" fxLayout="row">
-  <div id="player">
+  <cdk-drop cdkDropList #player="cdkDropList" id="player"
+  [connectedTo]="board">
     <h1>Player #</h1>
     <div class="sun-points">0</div>
-    <div class="tree tree-3">3</div>
+    <div class="tree tree-3"
+      cdkDrag 
+      (cdkDragStarted)="onDrag()" 
+      (cdkDragDropped)="onDrop($event)">3</div>
     <div class="tree tree-2">2</div>
     <div class="tree tree-1">1</div>
     <div class="tree tree-0">0</div>
-  </div>
+</cdk-drop>
 
-  <div id="board">
+  <cdk-drop #board id="board">
     <div class="spot spot-4" 
       *ngFor="let p of p4"
       [ngStyle]="{top: p.x+'px', left: p.y+'px'}">{{p.value}},{{p.name}}
@@ -26,9 +30,11 @@
       *ngFor="let p of p1"
       [ngStyle]="{top: p.x+'px', left: p.y+'px'}">{{p.value}},{{p.name}}</div>
 
-  </div>
+  </cdk-drop>
 
   <div id="log">
-
+    <div class="message" *ngFor="let l of logger">
+      {{l.time}} >> {{l.message}}
+    </div>
   </div>
 </div>
