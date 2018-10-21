@@ -1,1 +1,78 @@
-/* You can add global styles to this file, and also import other style files */
+$player-info-lg: 300px;
+#player {
+    min-width: $player-info-lg;
+    border: 1px solid #DDD; 
+    margin-right: 10px;
+}
+$tree-size-lg: 136px;
+$tree-offset-lg: 5px;
+.tree {
+    width: $tree-size-lg;
+    height: $tree-size-lg;
+    border: 3px solid #333;
+    border-radius: 50%;
+    color: #FFF;
+    text-align: center;
+    line-height: $tree-size-lg;
+    background-size: 570px !important;
+}
+.tree-3 {
+    background: url('assets/pieces.png') -150px 170px;
+}
+.tree-2 {
+    background: url('assets/pieces.png') -58px 170px;
+}
+.tree-1 {
+    background: url('assets/pieces.png') 26px 170px;
+}
+.tree-0 {
+    background-color: #33A;
+    opacity: 0.2;
+    content: "•";
+}
+
+$board-size-lg: 1000px;
+#board {
+    min-width: $board-size-lg;
+    min-height: $board-size-lg;
+    background-image: url('assets/board.jpg');
+}
+
+.spot {
+    width: $tree-size-lg;
+    height: $tree-size-lg;
+    border: 3px solid rgba(255, 255, 255, 0.33);
+    border-radius: 50%;
+    color: #FFF;
+    text-align: center;
+    line-height: $tree-size-lg;
+    .shadow {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #33A;
+        opacity: 0.2;
+        border-radius: 50%;
+    }
+}
+.spot-4 {
+    position: absolute;
+    top: $board-size-lg/2 - $tree-size-lg/2;
+    left: $board-size-lg/2 - $tree-size-lg/2 + $player-info-lg;
+}
+.spot-3 {
+    position: absolute;
+}
+.spot-2 {
+    position: absolute;
+}
+.spot-1 {
+    position: absolute;
+}
+
+#log {
+    min-width: $player-info-lg;
+    border: 1px solid #DDD;
+    margin-left: 10px;
+}
