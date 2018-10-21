@@ -1,36 +1,21 @@
 <div id="game" fxLayout="row">
-  <cdk-drop cdkDropList #player="cdkDropList" id="player"
-  [connectedTo]="board">
+  <div id="player">
     <h1>Player #</h1>
     <div class="sun-points">0</div>
-    <div class="tree tree-3"
-      cdkDrag 
-      (cdkDragStarted)="onDrag()" 
-      (cdkDragDropped)="onDrop($event)">3</div>
-    <div class="tree tree-2">2</div>
-    <div class="tree tree-1">1</div>
-    <div class="tree tree-0">0</div>
-</cdk-drop>
+    <div *ngFor="let i of [3, 2, 1, 0]"
+      class="tree tree-{{i}}" ngDraggable
+      (movingOffset)="onDrag($event)"
+      (stopped)="onDrop($event)"
+      [position]="{x: 0, y: ((3-i) * tileSize)}"
+      [preventDefaultEvent]="true"></div>
+</div>
 
-  <cdk-drop #board id="board">
-    <div class="spot spot-4" 
-      *ngFor="let p of p4"
-      [ngStyle]="{top: p.x+'px', left: p.y+'px'}">{{p.value}},{{p.name}}
-    </div>
-    
-    <div class="spot spot-3" 
-      *ngFor="let p of p3"
-      [ngStyle]="{top: p.x+'px', left: p.y+'px'}">{{p.value}},{{p.name}}</div>
+  <div id="board">
+    <div class="tile tile2" 
+      *ngFor="let t of tiles"
+      [ngStyle]="{top: t.y+'px', left: t.x+'px'}"></div>
 
-    <div class="spot spot-2" 
-      *ngFor="let p of p2"
-      [ngStyle]="{top: p.x+'px', left: p.y+'px'}">{{p.value}},{{p.name}}</div>
-
-    <div class="spot spot-1" 
-      *ngFor="let p of p1"
-      [ngStyle]="{top: p.x+'px', left: p.y+'px'}">{{p.value}},{{p.name}}</div>
-
-  </cdk-drop>
+  </div>
 
   <div id="log">
     <div class="message" *ngFor="let l of logger">

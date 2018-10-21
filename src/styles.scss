@@ -6,7 +6,10 @@ $player-info-lg: 300px;
 }
 $tree-size-lg: 136px;
 $tree-offset-lg: 5px;
+$tree-color-dark: #4F5050;
 .tree {
+    cursor: grab;
+    position: absolute;
     width: $tree-size-lg;
     height: $tree-size-lg;
     border: 3px solid #333;
@@ -16,11 +19,15 @@ $tree-offset-lg: 5px;
     line-height: $tree-size-lg;
     background-size: 570px !important;
     background-color: #FFF;
+    opacity: 0.75;
     z-index: 2;
     box-sizing: border-box;
     box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
                 0 8px 10px 1px rgba(0, 0, 0, 0.14),
                 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+    &:active {
+        cursor: grabbing;
+    }
 }
 .tree-3 {
     background: url('assets/pieces.jpg') -153px 170px;
@@ -32,8 +39,7 @@ $tree-offset-lg: 5px;
     background: url('assets/pieces.jpg') 21px 170px;
 }
 .tree-0 {
-    background-color: #33A;
-    opacity: 0.2;
+    background-color: #FFF;
 }
 .cdk-drag-preview {
     box-sizing: border-box;
@@ -50,7 +56,8 @@ $board-size-lg: 1000px;
     z-index: -2;
 }
 
-.spot {
+.tile {
+    position: absolute;
     width: $tree-size-lg;
     height: $tree-size-lg;
     border: 3px solid rgba(255, 255, 255, 0.33);
@@ -68,20 +75,6 @@ $board-size-lg: 1000px;
         opacity: 0.2;
         border-radius: 50%;
     }
-}
-.spot-4 {
-    position: absolute;
-    top: $board-size-lg/2 - $tree-size-lg/2;
-    left: $board-size-lg/2 - $tree-size-lg/2 + $player-info-lg;
-}
-.spot-3 {
-    position: absolute;
-}
-.spot-2 {
-    position: absolute;
-}
-.spot-1 {
-    position: absolute;
 }
 
 #log {

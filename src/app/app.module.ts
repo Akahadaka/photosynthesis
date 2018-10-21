@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { DragDropModule } from '@angular/cdk/drag-drop';
+import { AngularDraggableModule } from 'angular2-draggable';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,7 +15,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
     AppRoutingModule,
     FlexLayoutModule,
-    DragDropModule,
+    AngularDraggableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
