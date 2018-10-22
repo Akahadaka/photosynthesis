@@ -1,7 +1,4 @@
 import { Component } from '@angular/core';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { analyzeFileForInjectables } from '@angular/compiler';
-import { Size } from 'angular2-draggable/lib/models/size';
 
 export interface Point {
   x: number;
@@ -109,7 +106,7 @@ export class AppComponent {
     this.tiles.some(tile => {
       // Check within reasonable range
       if (Math.abs(tile.x - this.tree.x) <= range && Math.abs(tile.y - offset - this.tree.y) <= range) {
-        el.style.transform = 'translate(' + (tile.x - this.margin - 2) + 'px,' + (tile.y - offset + this.margin*2) + 'px)';
+        el.style.transform = 'translate(' + (tile.x - this.margin - 8) + 'px,' + (tile.y - offset + 2) + 'px)';
         this.tiles[tile.id].size = size;
         return true;
       }
@@ -118,6 +115,12 @@ export class AppComponent {
 
     this.shadowCalc();
     
+  }
+
+  sunPos(id: number) {
+    return this.sun1.some(rays => {
+      return (rays[0].t == id);
+    });
   }
 
   shadowCalc() {

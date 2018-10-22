@@ -1,12 +1,36 @@
+@mixin box-shadow() {
+    box-sizing: border-box;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+                0 8px 10px 1px rgba(0, 0, 0, 0.14),
+                0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
 $player-info-lg: 300px;
 #player {
     min-width: $player-info-lg;
     border: 1px solid #DDD; 
     margin-right: 10px;
+    button.next {
+        width: 200px;
+        height: 50px;
+        margin: 50px;
+        color: #FFF;
+        font-size: 1.2em;
+        border-radius: 30px;
+        background-color: #408344;
+        @include box-shadow();
+    }
 }
+
 $tree-size-lg: 136px;
 $tree-offset-lg: 5px;
 $tree-color-dark: #4F5050;
+.buy-trees {
+    border: 1px solid #AAA;
+    height: $tree-size-lg*5;
+    width: $tree-size-lg;
+    padding: 5px;
+}
 .tree {
     cursor: grab;
     position: absolute;
@@ -17,35 +41,30 @@ $tree-color-dark: #4F5050;
     color: #FFF;
     text-align: center;
     line-height: $tree-size-lg;
-    background-size: 570px !important;
+    background-size: 700px !important;
     background-color: #FFF;
     opacity: 0.75;
     z-index: 2;
-    box-sizing: border-box;
-    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-                0 8px 10px 1px rgba(0, 0, 0, 0.14),
-                0 3px 14px 2px rgba(0, 0, 0, 0.12);
+    @include box-shadow();
     &:active {
         cursor: grabbing;
     }
 }
 .tree-3 {
-    background: url('assets/pieces.jpg') -153px 170px;
+    background: url('assets/pieces.jpg') -300px 160px;
 }
 .tree-2 {
-    background: url('assets/pieces.jpg') -61px 170px;
+    background: url('assets/pieces.jpg') -210px 160px;
 }
 .tree-1 {
-    background: url('assets/pieces.jpg') 21px 170px;
+    background: url('assets/pieces.jpg') -130px 160px;
 }
 .tree-0 {
-    background-color: #FFF;
+    background: url('assets/pieces.jpg') -10px 135px;
 }
+
 .cdk-drag-preview {
-    box-sizing: border-box;
-    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-                0 8px 10px 1px rgba(0, 0, 0, 0.14),
-                0 3px 14px 2px rgba(0, 0, 0, 0.12);
+    @include box-shadow();
  }
 
 $board-size-lg: 1000px;
@@ -66,6 +85,12 @@ $board-size-lg: 1000px;
     text-align: center;
     line-height: $tree-size-lg;
     z-index: -1;
+    &.glow {
+        box-sizing: border-box;
+        box-shadow: 1px 1px 2px white, 
+                    0 0 25px yellow, 
+                    0 0 5px yellowgreen;
+    }
     .shadow {
         position: absolute;
         top: 0;
