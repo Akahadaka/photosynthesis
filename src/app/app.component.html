@@ -3,17 +3,22 @@
     <h1>Player #</h1>
     <div class="sun-points">0</div>
     <div *ngFor="let i of [3, 2, 1, 0]"
-      class="tree tree-{{i}}" ngDraggable
+      class="tree tree-{{i}}" 
+      [ngDraggable]="true"
       (movingOffset)="onDrag($event)"
-      (stopped)="onDrop($event)"
+      (stopped)="onDrop($event, i)"
       [position]="{x: 0, y: ((3-i) * tileSize)}"
       [preventDefaultEvent]="true"></div>
 </div>
 
   <div id="board">
-    <div class="tile tile2" 
+    <div class="tile" 
       *ngFor="let t of tiles"
-      [ngStyle]="{top: t.y+'px', left: t.x+'px'}"></div>
+      [ngStyle]="{top: t.y+'px', left: t.x+'px'}"
+      id="tile-{{t.id}}">
+      <div class="shadow" [hidden]="!t.shade"></div>
+      {{t.id}}
+    </div>
 
   </div>
 
