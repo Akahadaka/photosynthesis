@@ -1,7 +1,7 @@
 <div id="game" fxLayout="row">
   <div id="player">
     <h1>Player #</h1>
-    <div class="sun-points">0</div>
+    <div class="sun-points">{{play1.sun}}</div>
     <div class="buy-trees">
       <div *ngFor="let i of [3, 2, 1, 0, -1]"
         class="tree tree-{{i}}" 

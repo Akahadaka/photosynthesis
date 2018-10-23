@@ -82,15 +82,40 @@ export class AppComponent {
     { id: 36, value: 4, size: -1, shade: false, x: this.center.x, y: this.center.y },
   ];
 
-  sun1 = [
-    [{p:1,t:15}, {p:1,t:14}, {p:1,t:13}, {p:1,t:12}],
-    [{p:1,t:16}, {p:2,t:28}, {p:2,t:27}, {p:2,t:26}, {p:1,t:11}],
-    [{p:1,t:17}, {p:2,t:29}, {p:3,t:35}, {p:3,t:34}, {p:2,t:25}, {p:1,t:10}],
-    [{p:1,t:0}, {p:2,t:18}, {p:3,t:30}, {p:4,t:36}, {p:3,t:33}, {p:2,t:24}, {p:1,t:9}],
-    [{p:1,t:1}, {p:2,t:19}, {p:3,t:31}, {p:3,t:32}, {p:2,t:23}, {p:1,t:8}],
-    [{p:1,t:2}, {p:2,t:20}, {p:2,t:21}, {p:2,t:22}, {p:1,t:7}],
-    [{p:1,t:3}, {p:1,t:4}, {p:1,t:5}, {p:1,t:6}]
+  sun = [
+    [
+      [ 15, 14, 13, 12 ],
+      [ 16, 28, 27, 26, 11 ],
+      [ 17, 29, 35, 34, 25, 10 ],
+      [ 0, 18, 30, 36, 33, 24, 9 ],
+      [ 1, 19, 31, 32, 23, 8 ],
+      [ 2, 20, 21, 22, 7 ],
+      [ 3, 4, 5, 6 ]
+    ]
   ];
+
+  play1 = {
+    sun: 12,
+    board: {
+        seeds: [],
+        saplings: [],
+        youth: [],
+        prime: []
+    },
+    stash: {
+        seeds: [true, true],
+        saplings: [true, true],
+        youth: [true],
+        prime: []
+    },
+    shop: {
+        seeds: [{1: true}, {1: true}, {1: true}, {1: true}],
+        saplings: [{2: true}, {2: true}, {3: true}, {3: true}],
+        youth: [{3: true}, {3: true}, {3: true}],
+        prime: [{4: true}, {5: true}]
+    },
+    wood: 0
+  };
 
   constructor() {
     this.log('Game started with 1 player');
@@ -118,20 +143,20 @@ export class AppComponent {
   }
 
   sunPos(id: number) {
-    return this.sun1.some(rays => {
-      return (rays[0].t == id);
+    return this.sun[0].some(rays => {
+      return (rays[0] == id);
     });
   }
 
   shadowCalc() {
     this.shadowClear();
-    this.sun1.forEach(rays => {
+    this.sun[0].forEach(rays => {
       rays.forEach((tile, i) => {
-        let size = this.tiles[tile.t].size;
+        let size = this.tiles[tile].size;
         if (size > 0) {
           for (let j = i+1; j < i + size + 1; j++) {
-            if (rays[j] && this.tiles[rays[j].t].size <= size) {
-              this.tiles[rays[j].t].shade = true;
+            if (rays[j] && this.tiles[rays[j]].size <= size) {
+              this.tiles[rays[j]].shade = true;
             }
           }
         }
